@@ -275,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         int height = 140*2;
         int width = 140*2;
         Mat topcorner;
+        Mat topcorner2;
 
         ///prepocess frame
 
@@ -288,6 +289,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         Imgproc.GaussianBlur(graytemp, graytemp, new org.opencv.core.Size(7,7),2 , 2);
         //convert gray frame to binary using apadative thresold
         Imgproc.adaptiveThreshold(graytemp, intermediate, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C, Imgproc.THRESH_BINARY_INV, 5, 5);
+        topcorner2= mRgba.submat(height,   height*2, 0, width);
+        Imgproc.cvtColor(intermediate, topcorner2, Imgproc.COLOR_GRAY2BGRA, 4);
         Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new org.opencv.core.Size(9,9));
         //dilate the frame
         Imgproc.dilate(intermediate, intermediate, element1);
@@ -305,8 +308,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
         ///use this to classify camera feed
 
-        //classifier.classifyMat(CNN_input);
-        //Imgproc.putText(mRgba, "Digit: "+classifier.getdigit()+ " Prob: "+classifier.getProb(), new Point(top, left), 3, 3, new Scalar(255, 0, 0, 255), 2);
+        classifier.classifyMat(CNN_input);
+        Imgproc.putText(mRgba, "Digit: "+classifier.getdigit()+ " Prob: "+classifier.getProb(), new Point(top, left), 3, 3, new Scalar(255, 0, 0, 255), 2);
 
 
         graytemp.release();
