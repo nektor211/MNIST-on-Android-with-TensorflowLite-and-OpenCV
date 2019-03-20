@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.example.rohithkvsp.handwittendigit"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,12 +35,13 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile project(':openCVLibrary341')
-    compile 'org.tensorflow:tensorflow-lite:0.1.1'
-
+    //    compile project(':openCVLibrary341')
+    //    compile 'org.tensorflow:tensorflow-lite:0.1.1'
+    implementation project(':openCVLibrary343')
 }
